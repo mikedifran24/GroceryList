@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var listOfGrocerys = [];
+
+                $('#addItemButton').click(function() {
+                    var itemName = $('#addItemName').val();
+                    if (/\S/.test(itemName)) {
+                        $('#groceryList').append('<li><span style="width: 200px; float: left"><input type="checkbox">' + itemName + '</span>&nbsp&nbsp<button type="button" class="remove">' + 'Remove' + '</button></li>');
+                        $('#addItemName').val("");
+                        
+                        //$("groceryList li").each(function() { listOfGrocerys.push($(this).text()) });
+                        //send this updated list to the back end 
+                    }
+                });
+
+                $(document).on('click','button', function(){
+                    if ($(this).hasClass('remove')) {
+                            $(this).parent().remove();
+
+                            //$("groceryList li").each(function() { listOfGrocerys.push($(this).text()) });
+                            //send this updated list to the back end
+                    }
+                });
+
+                $(document).on('click','input', function(){
+                    if ($(this).is(':checkbox')) {
+                        if ($(this).is(':checked')) {
+                            $(this).parent().css( "background-color", "green" );
+                        }
+                        else {
+                            $(this).parent().css( "background-color", "white" );
+                        };
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1><u>Shopping Cart</u></h1>
+        <div id="addItemSection">
+            <input id="addItemName" type="text">
+            <button id="addItemButton" type="button">Add</button>
+        </div>
+        <hr>
+        <div id="listSection">
+            <ol id='groceryList'>
+            </ol>
+        </div>
+    </body>
+</html>
